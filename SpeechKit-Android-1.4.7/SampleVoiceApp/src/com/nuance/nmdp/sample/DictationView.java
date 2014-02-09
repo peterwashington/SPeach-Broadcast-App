@@ -282,7 +282,7 @@ public class DictationView extends Activity
             	
             	// Create a new HttpClient and Post Header.
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://www.yoursite.com/script.php");
+                HttpPost httppost = new HttpPost("http://[INSERT-IP-HERE-FOR-DEMO]:9000/data/receive");
                 
                 try {
                     // Add your data
