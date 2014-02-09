@@ -1,5 +1,14 @@
 package com.nuance.nmdp.sample;
 
+import java.io.IOException;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import com.nuance.nmdp.speechkit.Recognizer;
 import com.nuance.nmdp.speechkit.Recognition;
 import com.nuance.nmdp.speechkit.SpeechError;
@@ -263,6 +272,30 @@ public class DictationView extends Activity
 
             @Override
             public void onResults(Recognizer recognizer, Recognition results) {
+            	
+            	// PETER: Get top result and send it to server.
+            	String topResult = "No top result! Dragon didn't work :(";
+            	if (results.getResultCount() > 0) {
+            	    topResult = results.getResult(0).getText();
+            	    // do something with topResult...
+            	}
+            	
+            	// Create a new HttpClient and Post Header.
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new HttpPost("http://www.yoursite.com/script.php");
+                
+                try {
+                    // Add your data
+                    httppost.setEntity(new StringEntity(topResult));
+                    // Execute HTTP Post Request
+                    HttpResponse response = httpclient.execute(httppost);
+                    
+                } catch (ClientProtocolException e) {
+                    System.out.println("CLIENT-PROTOCOL-EXCEPTION!!!!!");
+                } catch (IOException e) {
+                    System.out.println("IO-EXCEPTION!!!!!");
+                }
+            	
                 if (_listeningDialog.isShowing()) dismissDialog(LISTENING_DIALOG);
                 _currentRecognizer = null;
                 _listeningDialog.setRecording(false);
