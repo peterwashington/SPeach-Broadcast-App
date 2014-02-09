@@ -13,6 +13,8 @@ public class MainView extends Activity {
     
     private static SpeechKit _speechKit;
     
+    private String test = "test";
+    
     // Allow other activities to access the SpeechKit instance.
     static SpeechKit getSpeechKit()
     {
