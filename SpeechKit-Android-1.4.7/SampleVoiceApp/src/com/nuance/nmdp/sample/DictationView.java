@@ -280,21 +280,23 @@ public class DictationView extends Activity
             	    // do something with topResult...
             	}
             	
-            	// Create a new HttpClient and Post Header.
-                HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://[INSERT-IP-HERE-FOR-DEMO]:9000/api/add");
-                //only works on Rice owls -Andres
-                try {
-                    // Add your data
-                    httppost.setEntity(new StringEntity(topResult));
-                    // Execute HTTP Post Request
-                    HttpResponse response = httpclient.execute(httppost);
-                    
-                } catch (ClientProtocolException e) {
-                    System.out.println("CLIENT-PROTOCOL-EXCEPTION!!!!!");
-                } catch (IOException e) {
-                    System.out.println("IO-EXCEPTION!!!!!");
-                }
+            	
+            	
+//            	// Create a new HttpClient and Post Header.
+//                HttpClient httpclient = new DefaultHttpClient();
+//                HttpPost httppost = new HttpPost("http://[INSERT-IP-HERE-FOR-DEMO]:9000/api/add");
+//                //only works on Rice owls -Andres
+//                try {
+//                    // Add your data
+//                    httppost.setEntity(new StringEntity(topResult));
+//                    // Execute HTTP Post Request
+//                    HttpResponse response = httpclient.execute(httppost);
+//                    
+//                } catch (ClientProtocolException e) {
+//                    System.out.println("CLIENT-PROTOCOL-EXCEPTION!!!!!");
+//                } catch (IOException e) {
+//                    System.out.println("IO-EXCEPTION!!!!!");
+//                }
             	
                 if (_listeningDialog.isShowing()) dismissDialog(LISTENING_DIALOG);
                 _currentRecognizer = null;
