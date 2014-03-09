@@ -282,8 +282,8 @@ public class DictationView extends Activity
             	
             	// Create a new HttpClient and Post Header.
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://[INSERT-IP-HERE-FOR-DEMO]:9000/data/receive");
-                
+                HttpPost httppost = new HttpPost("http://[INSERT-IP-HERE-FOR-DEMO]:9000/api/add");
+                //only works on Rice owls -Andres
                 try {
                     // Add your data
                     httppost.setEntity(new StringEntity(topResult));
