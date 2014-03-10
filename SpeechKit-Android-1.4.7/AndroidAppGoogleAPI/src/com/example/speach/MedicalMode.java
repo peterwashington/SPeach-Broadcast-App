@@ -130,25 +130,36 @@ public class MedicalMode extends Activity {
 		@Override
 		public void onResults(Bundle data) {
 			//System.out.println("onResults");
-			ArrayList<String> text = data.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION); // obtain the result
+			final ArrayList<String> text = data.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION); // obtain the result
 			EditText displayText = (EditText) findViewById(R.id.display_message);
             displayText.append(text.get(0)+"\n"); // put text on the text box
             
-//            // Create a new HttpClient and Post Header.
-//            HttpClient httpclient = new DefaultHttpClient();
-//            HttpPost httppost = new HttpPost("http://[INSERT-IP-HERE-FOR-DEMO]:9000/api/add");
-//            //only works on Rice owls -Andres
-//            try {
-//                // Add your data
-//                httppost.setEntity(new StringEntity(text.get(0)));
-//                // Execute HTTP Post Request
-//                HttpResponse response = httpclient.execute(httppost);
-//                
-//            } catch (ClientProtocolException e) {
-//                System.out.println("CLIENT-PROTOCOL-EXCEPTION!!!!!");
-//            } catch (IOException e) {
-//                System.out.println("IO-EXCEPTION!!!!!");
-//            }
+            Runnable r = new Runnable() {
+
+				public void run() {
+					// Create a new HttpClient and Post Header.
+		            HttpClient httpclient = new DefaultHttpClient();
+		            HttpPost httppost = new HttpPost("http://10.117.76.102:9000/api/add");
+		            //only works on Rice owls -Andres
+		            try {
+		                // Add your data
+		                httppost.setEntity(new StringEntity(text.get(0)));
+		                // Execute HTTP Post Request
+		                HttpResponse response = httpclient.execute(httppost);
+		                
+		            } catch (ClientProtocolException e) {
+		                System.out.println("CLIENT-PROTOCOL-EXCEPTION!!!!!");
+		            } catch (IOException e) {
+		                System.out.println("IO-EXCEPTION!!!!!");
+		            }
+					
+				}
+            	
+            };
+            
+            Thread t = new Thread(r);
+            t.start();
+           
             
             sr.startListening(intent); // recursively call
 		}
