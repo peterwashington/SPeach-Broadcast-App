@@ -131,6 +131,10 @@ public class MedicalMode extends Activity {
 		public void onResults(Bundle data) {
 			//System.out.println("onResults");
 			final ArrayList<String> text = data.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION); // obtain the result
+			
+			float[] confidencesArray = (float[]) data.get("confidence_scores");
+			final float topConfidence = confidencesArray[0];
+			
 			EditText displayText = (EditText) findViewById(R.id.display_message);
             displayText.append(text.get(0)+"\n"); // put text on the text box
             
@@ -139,11 +143,25 @@ public class MedicalMode extends Activity {
 				public void run() {
 					// Create a new HttpClient and Post Header.
 		            HttpClient httpclient = new DefaultHttpClient();
-		            HttpPost httppost = new HttpPost("http://10.117.76.102:9000/api/add");
+		            HttpPost httppost = new HttpPost("http://10.117.78.60:9000/api/add");
 		            //only works on Rice owls -Andres
 		            try {
 		                // Add your data
-		                httppost.setEntity(new StringEntity(text.get(0)));
+		            	if (topConfidence > 0.9) {
+		            		httppost.setEntity(new StringEntity(text.get(0)));		            		
+		            	}
+		            	else if (topConfidence > 0.8) {
+		            		httppost.setEntity(new StringEntity("*"+text.get(0)));
+		            	}
+		            	else if (topConfidence > 0.6) {
+		            		httppost.setEntity(new StringEntity("**"+text.get(0)));
+		            	}
+		            	else if (topConfidence > 0.4) {
+		            		httppost.setEntity(new StringEntity("***"+text.get(0)));
+		            	}
+		            	else {
+		            		httppost.setEntity(new StringEntity("****"+text.get(0)));
+		            	}
 		                // Execute HTTP Post Request
 		                HttpResponse response = httpclient.execute(httppost);
 		                
