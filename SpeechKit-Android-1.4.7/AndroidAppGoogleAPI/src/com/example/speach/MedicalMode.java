@@ -177,7 +177,6 @@ public class MedicalMode extends Activity {
             
             Thread t = new Thread(r);
             t.start();
-           
             
             sr.startListening(intent); // recursively call
 		}
