@@ -147,21 +147,8 @@ public class MedicalMode extends Activity {
 		            //only works on Rice owls -Andres
 		            try {
 		                // Add your data
-		            	if (topConfidence > 0.9) {
-		            		httppost.setEntity(new StringEntity(text.get(0)));		            		
-		            	}
-		            	else if (topConfidence > 0.8) {
-		            		httppost.setEntity(new StringEntity("*"+text.get(0)));
-		            	}
-		            	else if (topConfidence > 0.6) {
-		            		httppost.setEntity(new StringEntity("**"+text.get(0)));
-		            	}
-		            	else if (topConfidence > 0.4) {
-		            		httppost.setEntity(new StringEntity("***"+text.get(0)));
-		            	}
-		            	else {
-		            		httppost.setEntity(new StringEntity("****"+text.get(0)));
-		            	}
+	            		httppost.setEntity(new StringEntity(text.get(0)+"&&&"+topConfidence));		            		
+	            	
 		                // Execute HTTP Post Request
 		                HttpResponse response = httpclient.execute(httppost);
 		                
