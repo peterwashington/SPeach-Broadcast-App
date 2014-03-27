@@ -143,7 +143,7 @@ public class MedicalMode extends Activity {
 				public void run() {
 					// Create a new HttpClient and Post Header.
 		            HttpClient httpclient = new DefaultHttpClient();
-		            HttpPost httppost = new HttpPost("http://10.117.78.60:9000/api/add");
+		            HttpPost httppost = new HttpPost("http://10.117.78.15:9000/api/add");
 		            //only works on Rice owls -Andres
 		            try {
 		                // Add your data

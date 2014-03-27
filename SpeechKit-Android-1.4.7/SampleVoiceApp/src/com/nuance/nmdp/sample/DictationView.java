@@ -275,20 +275,22 @@ public class DictationView extends Activity
             	
             	// PETER: Get top result and send it to server.
             	String topResult = "No top result! Dragon didn't work :(";
+            	String confidence = "No confidence score! Dragon didn't work :(";
             	if (results.getResultCount() > 0) {
             	    topResult = results.getResult(0).getText();
-            	    // do something with topResult...
+            	    confidence = String.valueOf(results.getResult(0).getScore() / 1000.0);
+            	    System.out.println("CONFIDENCE:::" + confidence);
             	}
             	
             	
-            	
+            	/*
             	// Create a new HttpClient and Post Header.
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpPost httppost = new HttpPost("http://10.117.76.102:9000/api/add");
                 //only works on Rice owls -Andres
                 try {
                     // Add your data
-                    httppost.setEntity(new StringEntity(topResult));
+                    httppost.setEntity(new StringEntity(topResult+"&&&"));
                     // Execute HTTP Post Request
                     HttpResponse response = httpclient.execute(httppost);
                     
@@ -297,7 +299,7 @@ public class DictationView extends Activity
                 } catch (IOException e) {
                     System.out.println("IO-EXCEPTION!!!!!");
                 }
-            	
+            	*/
                 if (_listeningDialog.isShowing()) dismissDialog(LISTENING_DIALOG);
                 _currentRecognizer = null;
                 _listeningDialog.setRecording(false);
