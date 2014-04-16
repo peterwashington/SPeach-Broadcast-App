@@ -89,6 +89,7 @@ public class MedicalMode extends Activity {
 	            break;
 	        case SpeechRecognizer.ERROR_SPEECH_TIMEOUT: 
 	            mError = " speech time out" ; 
+	            sr.startListening(intent);
 	            break;
 	        case SpeechRecognizer.ERROR_NO_MATCH: 
 	            mError = " no match" ; 
