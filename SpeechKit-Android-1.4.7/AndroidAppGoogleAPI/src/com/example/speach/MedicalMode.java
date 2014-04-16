@@ -221,6 +221,7 @@ public class MedicalMode extends Activity {
 	 * @param view
 	 */
 	public void startRecognizer(View view) {
+		this.stopRecognizer(view);
 		intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US"); // TODO: Try out the "FREE_FORM"
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, this.getPackageName()); // Need to specify this
