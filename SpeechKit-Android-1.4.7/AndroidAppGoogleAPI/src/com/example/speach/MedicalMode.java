@@ -131,7 +131,8 @@ public class MedicalMode extends Activity {
 		public void onResults(Bundle data) {
 			//System.out.println("onResults");
 			final ArrayList<String> text = data.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION); // obtain the result
-			
+			final String sessionId = "";
+
 			float[] confidencesArray = (float[]) data.get("confidence_scores");
 			final float topConfidence = confidencesArray[0];
 			
@@ -143,7 +144,7 @@ public class MedicalMode extends Activity {
 				public void run() {
 					// Create a new HttpClient and Post Header.
 		            HttpClient httpclient = new DefaultHttpClient();
-		            HttpPost httppost = new HttpPost("http://10.117.78.15:9000/api/add");
+		            HttpPost httppost = new HttpPost("http://10.117.78.15:9000/api/add/" + sessionId);
 		            //only works on Rice owls -Andres
 		            try {
 		                // Add your data
