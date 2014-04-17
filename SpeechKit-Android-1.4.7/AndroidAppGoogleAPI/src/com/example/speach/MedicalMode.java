@@ -19,6 +19,7 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class MedicalMode extends Activity {
 	 * The intent that is passed along throughout the life of the activity
 	 */
 	private Intent intent;
+	
 	
 	/**
 	 * A inner class implements the RecognitionListener so that 
@@ -120,6 +122,8 @@ public class MedicalMode extends Activity {
 		public void onReadyForSpeech(Bundle arg0) {
 			//System.out.println("onReadyForSpeech");
 		}
+		
+		
 
 		/**
 		 * Recursively calls startListening() so that the speech recognizer will keep on listening to the voice
@@ -132,7 +136,11 @@ public class MedicalMode extends Activity {
 		public void onResults(Bundle data) {
 			//System.out.println("onResults");
 			final ArrayList<String> text = data.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION); // obtain the result
-			final String sessionId = "";
+			
+			
+			
+			
+			final String sID = sessionId[0];
 
 			float[] confidencesArray = (float[]) data.get("confidence_scores");
 			final float topConfidence = confidencesArray[0];
@@ -145,7 +153,7 @@ public class MedicalMode extends Activity {
 				public void run() {
 					// Create a new HttpClient and Post Header.
 		            HttpClient httpclient = new DefaultHttpClient();
-		            HttpPost httppost = new HttpPost("http://10.117.78.15:9000/api/add/" + sessionId);
+		            HttpPost httppost = new HttpPost("http://10.116.79.199:9000/api/add/" + sID);
 		            //only works on Rice owls -Andres
 		            try {
 		                // Add your data
@@ -177,11 +185,23 @@ public class MedicalMode extends Activity {
 		
 	}
 	
+	private String[] sessionId = new String[1];
+	
 	/** AUTO GENERATED **/
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_medical_mode);
+		
+		Button sessionButton = (Button) findViewById(R.id.setSession);
+		
+		sessionButton.setOnClickListener(new View.OnClickListener() {
+		    public void onClick(View v) {
+		    	EditText sessionIDText = (EditText) findViewById(R.id.session);
+				
+				sessionId[0] = sessionIDText.getText().toString();
+		    }
+		});
 		
 		/**
 		 * Speech Recognition
