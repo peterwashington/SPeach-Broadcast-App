@@ -153,7 +153,7 @@ public class MedicalMode extends Activity {
 				public void run() {
 					// Create a new HttpClient and Post Header.
 		            HttpClient httpclient = new DefaultHttpClient();
-		            HttpPost httppost = new HttpPost("http://10.116.79.199:9000/api/add/" + sID);
+		            HttpPost httppost = new HttpPost("http://speach.herokuapp.com/api/add/" + sID);
 		            //only works on Rice owls -Andres
 		            try {
 		                // Add your data
