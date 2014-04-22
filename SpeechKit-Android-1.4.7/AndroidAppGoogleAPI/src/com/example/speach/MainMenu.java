@@ -48,38 +48,42 @@ public class MainMenu extends Activity {
      * @param view
      */
     public void startMedicalMode(View view) {
-		EditText sessionNameInput = (EditText) findViewById(R.id.editText1);
-		final String sessionName = sessionNameInput.getText().toString();
-		
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				// get the session id for the new session from the server.
-			    HttpClient httpclient = new DefaultHttpClient();
-			    HttpPost httppost = new HttpPost("http://www.yoursite.com/script.php");
+    	Intent intent = new Intent(this, MedicalMode.class);
+    	startActivity(intent);
 
-			    try {
-			        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-			        nameValuePairs.add(new BasicNameValuePair("name", sessionName));
-
-			        // Execute HTTP Post Request
-			        HttpResponse response = httpclient.execute(httppost);
-			        
-			    } catch (ClientProtocolException e) {
-			        // TODO Auto-generated catch block
-			    } catch (IOException e) {
-			        // TODO Auto-generated catch block
-			    }
-		    	
-			    // start the medical mode.
-		    	Intent intent = new Intent(MainMenu.this, MedicalMode.class);
-		    	startActivity(intent);	
-			}
-		};
-		
-		Thread t = new Thread();
-		
-		t.start();
+    	
+	//		EditText sessionNameInput = (EditText) findViewById(R.id.editText1);
+	//		final String sessionName = sessionNameInput.getText().toString();
+	//		
+	//		Runnable r = new Runnable() {
+	//			@Override
+	//			public void run() {
+	//				// get the session id for the new session from the server.
+	//			    HttpClient httpclient = new DefaultHttpClient();
+	//			    HttpPost httppost = new HttpPost("http://www.yoursite.com/script.php");
+	//
+	//			    try {
+	//			        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+	//			        nameValuePairs.add(new BasicNameValuePair("name", sessionName));
+	//
+	//			        // Execute HTTP Post Request
+	//			        HttpResponse response = httpclient.execute(httppost);
+	//			        
+	//			    } catch (ClientProtocolException e) {
+	//			        // TODO Auto-generated catch block
+	//			    } catch (IOException e) {
+	//			        // TODO Auto-generated catch block
+	//			    }
+	//		    	
+	//			    // start the medical mode.
+	//		    	Intent intent = new Intent(MainMenu.this, MedicalMode.class);
+	//		    	startActivity(intent);	
+	//			}
+	//		};
+	//		
+	//		Thread t = new Thread();
+	//		
+	//		t.start();
     }
     
 }
